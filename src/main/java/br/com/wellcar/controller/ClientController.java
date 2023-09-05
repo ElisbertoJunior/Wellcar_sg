@@ -38,4 +38,10 @@ public class ClientController {
         return ResponseEntity.ok().body(service.updateClient(id, entryCLient));
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<List<Client>> delete(@PathVariable Long id) {
+        service.deleteClient(id);
+        return ResponseEntity.ok().body(service.findAllClients());
+    }
+
 }

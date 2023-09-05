@@ -40,6 +40,10 @@ public class ClientService {
 
         return repository.save(client);
 
+    }
 
+    public void deleteClient(Long id) {
+        Client client = findClientById(id);
+        repository.delete(client);
     }
 }
