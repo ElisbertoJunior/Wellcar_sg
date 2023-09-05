@@ -24,4 +24,9 @@ public class ClientService {
     public List<Client> findAllClients() {
         return repository.findAll();
     }
+
+    public Client findClientById(Long id) {
+        return repository.findById(id).orElseThrow();
+
+    }
 }

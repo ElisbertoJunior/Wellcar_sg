@@ -1,6 +1,7 @@
 package br.com.wellcar.controller;
 
 import br.com.wellcar.exception.ClientNullException;
+import br.com.wellcar.exception.FindClientNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,6 +17,14 @@ public class ClientControllerAdvice {
     public ResponseEntity<Object> catchNullError() {
         Map<String, Object> body = new HashMap<>();
         body.put("message", "ERRO: Verique os campos do clinte um ou mais estao vazios");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+
+    }
+
+    @ExceptionHandler(FindClientNullException.class)
+    public ResponseEntity<Object> catchFindNullError() {
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", "ERRO: Cliente nao encontrado!");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 
     }
