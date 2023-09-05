@@ -22,9 +22,9 @@ public class ClientControllerAdvice {
     }
 
     @ExceptionHandler(FindClientNullException.class)
-    public ResponseEntity<Object> catchFindNullError() {
+    public ResponseEntity<Object> catchFindNullError(Long id) {
         Map<String, Object> body = new HashMap<>();
-        body.put("message", "ERRO: Cliente nao encontrado!");
+        body.put("message", "ERRO: Cliente não encontrado com o ID: " + id);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 
     }

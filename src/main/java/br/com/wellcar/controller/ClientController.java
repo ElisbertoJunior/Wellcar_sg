@@ -1,6 +1,8 @@
 package br.com.wellcar.controller;
 
+import br.com.wellcar.entity.Car;
 import br.com.wellcar.entity.Client;
+import br.com.wellcar.repository.CarRepository;
 import br.com.wellcar.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/client")
@@ -17,6 +20,8 @@ public class ClientController {
 
     @Autowired
     private ClientService service;
+
+
 
     @PostMapping("/save")
     public ResponseEntity<Client> register(@RequestBody Client client) {
@@ -42,6 +47,12 @@ public class ClientController {
     public ResponseEntity<List<Client>> delete(@PathVariable Long id) {
         service.deleteClient(id);
         return ResponseEntity.ok().body(service.findAllClients());
+    }
+
+    @PostMapping("/{clientId}/cars")
+    public ResponseEntity<Client> addCarToClient(@PathVariable Long clientId, @RequestBody Car carToAdd) {
+        Client updatedClient = service.addCarToClient(clientId, carToAdd);
+        return ResponseEntity.ok().body(updatedClient);
     }
 
 }

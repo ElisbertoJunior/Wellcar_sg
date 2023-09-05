@@ -1,6 +1,7 @@
 package br.com.wellcar.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class Client {
     @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name = "code_car")
     private List<Car> cars;
 }

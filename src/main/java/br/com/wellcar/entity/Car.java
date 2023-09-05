@@ -30,9 +30,6 @@ public class Car {
     @Column(name = "age_model")
     private String ageModel;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
 
 
 }
