@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/client")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -19,6 +21,11 @@ public class ClientController {
     @PostMapping("/save")
     public ResponseEntity<Client> register(@RequestBody Client client) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerClient(client));
+    }
+
+    @GetMapping("all-clients")
+    public ResponseEntity<List<Client>> findall() {
+        return ResponseEntity.ok().body(service.findAllClients());
     }
 
 }
