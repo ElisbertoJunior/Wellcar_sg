@@ -2,6 +2,7 @@ package br.com.wellcar.service;
 
 import br.com.wellcar.entity.Client;
 import br.com.wellcar.exception.ClientNullException;
+import br.com.wellcar.exception.FindClientNullException;
 import br.com.wellcar.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,19 @@ public class ClientService {
     }
 
     public Client findClientById(Long id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(FindClientNullException::new);
+    }
+
+    public Client updateClient(Long id, Client entryClient) {
+        Client client = findClientById(id);
+
+        client.setName(entryClient.getName());
+        client.setPhone(entryClient.getPhone());
+        client.setCpf(entryClient.getCpf());
+        client.setEmail(entryClient.getEmail());
+
+        return repository.save(client);
+
 
     }
 }

@@ -28,4 +28,14 @@ public class ClientController {
         return ResponseEntity.ok().body(service.findAllClients());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Client> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.findClientById(id));
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client entryCLient) {
+        return ResponseEntity.ok().body(service.updateClient(id, entryCLient));
+    }
+
 }
