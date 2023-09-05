@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -26,4 +28,7 @@ public class Client {
 
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Car> cars;
 }
