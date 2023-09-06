@@ -18,12 +18,12 @@ public class CarService {
         repository.save(car);
     }
 
-    public Car findCartById(Long id) {
+    public Car findCarById(Long id) {
         return repository.findById(id).orElseThrow(CarNullException::new);
     }
 
     public Car updateCar(Long id, Car entryCar) {
-        Car updateCar = findCartById(id);
+        Car updateCar = findCarById(id);
 
         updateCar.setBrand(entryCar.getBrand());
         updateCar.setModel(entryCar.getModel());
@@ -35,7 +35,7 @@ public class CarService {
     }
 
     public void deleteCar(long id) {
-        Car car = findCartById(id);
+        Car car = findCarById(id);
         repository.delete(car);
     }
 
