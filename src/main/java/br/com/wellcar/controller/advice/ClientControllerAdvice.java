@@ -1,5 +1,6 @@
-package br.com.wellcar.controller;
+package br.com.wellcar.controller.advice;
 
+import br.com.wellcar.exception.CarNullException;
 import br.com.wellcar.exception.ClientNullException;
 import br.com.wellcar.exception.FindClientNullException;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,10 @@ public class ClientControllerAdvice {
     @ExceptionHandler(FindClientNullException.class)
     public ResponseEntity<Object> catchFindNullError(Long id) {
         Map<String, Object> body = new HashMap<>();
-        body.put("message", "ERRO: Cliente não encontrado com o ID: " + id);
+        body.put("message", "ERRO: Cliente não encontrado com este ID");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 
     }
+
+
 }

@@ -2,8 +2,9 @@ package br.com.wellcar.service;
 
 import br.com.wellcar.entity.Car;
 import br.com.wellcar.entity.Client;
+import br.com.wellcar.exception.CarNullException;
+import br.com.wellcar.exception.FindClientNullException;
 import br.com.wellcar.repository.CarRepository;
-import br.com.wellcar.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,29 @@ public class CarService {
     @Autowired
     private CarRepository repository;
 
+    public void registerCar(Car car) {
+        repository.save(car);
+    }
 
-    public Car registerCar(Car car) {
-       return repository.save(car);
+    public Car findCartById(Long id) {
+        return repository.findById(id).orElseThrow(CarNullException::new);
+    }
+
+    public Car updateCar(Long id, Car entryCar) {
+        Car updateCar = findCartById(id);
+
+        updateCar.setBrand(entryCar.getBrand());
+        updateCar.setModel(entryCar.getModel());
+        updateCar.setLicense(entryCar.getLicense());
+        updateCar.setColor(entryCar.getColor());
+        updateCar.setAgeModel(entryCar.getAgeModel());
+
+        return repository.save(updateCar);
+    }
+
+    public void deleteCar(long id) {
+        Car car = findCartById(id);
+        repository.delete(car);
     }
 
 

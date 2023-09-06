@@ -17,11 +17,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClientController {
 
-
     @Autowired
     private ClientService service;
-
-
 
     @PostMapping("/save")
     public ResponseEntity<Client> register(@RequestBody Client client) {

@@ -30,7 +30,7 @@ public class Client {
     @Column(unique = true)
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "code_car")
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "client_id")
     private List<Car> cars;
 }
