@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/budget")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -16,7 +20,26 @@ public class BudgetController {
     private BudgetService service;
 
     @PostMapping("/{clientId}/{carId}")
-    public ResponseEntity<Budget> createBudget(@PathVariable Long clientId, @PathVariable Long carId, @RequestBody Budget budget) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.cretaBudget(clientId, carId, budget));
+    public ResponseEntity<Budget> create(@PathVariable Long clientId, @PathVariable Long carId, @RequestBody Budget budget) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createBudget(clientId, carId, budget));
     }
+
+    @GetMapping("/all-budgets")
+    public ResponseEntity<List<Budget>> findAll() {
+        return ResponseEntity.ok().body(service.findAllBudget());
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Budget> update(@PathVariable Long id, @RequestBody Budget updateBudget) {
+        return ResponseEntity.ok().body(service.updateBudget(id, updateBudget));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        service.deleteBudget(id);
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", "Orçamento excluido com sucesso!");
+        return ResponseEntity.ok().body(body);
+    }
+
 }
