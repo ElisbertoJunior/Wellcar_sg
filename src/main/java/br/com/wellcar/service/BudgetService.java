@@ -8,6 +8,7 @@ import br.com.wellcar.repository.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,6 +29,7 @@ public class BudgetService {
 
         budget.setClient(client);
         budget.setCar(car);
+        budget.setCreationDate(LocalDateTime.now());
 
         return repository.save(budget);
     }
