@@ -34,7 +34,15 @@ public class Budget {
             joinColumns = {@JoinColumn(name = "id_budget", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_product", referencedColumnName = "id")}
     )
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_lab_auxiliary",
+            joinColumns = {@JoinColumn(name = "id_budget", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_labor", referencedColumnName = "id")}
+    )
+    private List<Labor> labors;
 
     private Double totalValue;
 

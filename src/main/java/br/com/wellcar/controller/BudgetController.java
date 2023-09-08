@@ -42,4 +42,13 @@ public class BudgetController {
         return ResponseEntity.ok().body(body);
     }
 
+    @PostMapping("/{budgetId}/product/{prodId}")
+    public ResponseEntity<Budget> addProduct(@PathVariable Long budgetId, @PathVariable Long prodId) {
+        return ResponseEntity.ok().body(service.addProdToBudget(budgetId, prodId));
+    }
+
+    @PostMapping("/{budgetId}/labor/{laborId}")
+    public ResponseEntity<Budget> addLabor(@PathVariable Long budgetId, @PathVariable Long laborId) {
+        return ResponseEntity.ok().body(service.addLaborToBudget(budgetId, laborId));
+    }
 }

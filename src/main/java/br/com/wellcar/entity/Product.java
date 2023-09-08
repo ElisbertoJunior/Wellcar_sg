@@ -24,7 +24,5 @@ public class Product {
     @Column(nullable = false)
     private Double price;
 
-    @ManyToMany(mappedBy = "products")
-    private List<Budget> budgets = new ArrayList<>();
 
 }
