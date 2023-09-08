@@ -10,7 +10,6 @@ import lombok.Setter;
 @Table(name = "tb_budget")
 public class Budget {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

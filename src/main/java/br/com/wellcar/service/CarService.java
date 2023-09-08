@@ -1,9 +1,7 @@
 package br.com.wellcar.service;
 
 import br.com.wellcar.entity.Car;
-import br.com.wellcar.entity.Client;
 import br.com.wellcar.exception.CarNullException;
-import br.com.wellcar.exception.FindClientNullException;
 import br.com.wellcar.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
