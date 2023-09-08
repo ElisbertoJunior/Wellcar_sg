@@ -3,6 +3,7 @@ package br.com.wellcar.service;
 import br.com.wellcar.entity.*;
 import br.com.wellcar.exception.BudgetNullException;
 import br.com.wellcar.repository.BudgetRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ public class BudgetService {
     public Budget updateBudget(Long id, Budget updateBudget) {
         Budget currentBudget = findBudgetById(id);
 
-        currentBudget.setTotalValue(updateBudget.getTotalValue());
+        currentBudget.setTotalValue(CalculateBudgetService.getBill(currentBudget));
         return repository.save(currentBudget);
     }
 
@@ -65,6 +66,7 @@ public class BudgetService {
         products.add(product);
 
         budget.setProducts(products);
+        budget.setTotalValue(CalculateBudgetService.getBill(budget));
         return repository.save(budget);
     }
 
@@ -76,8 +78,11 @@ public class BudgetService {
         labors.add(labor);
 
         budget.setLabors(labors);
+        budget.setTotalValue(CalculateBudgetService.getBill(budget));
         return repository.save(budget);
     }
+
+
 
 
 }
