@@ -28,13 +28,15 @@ public class BudgetService {
     @Autowired
     private LaborService laborService;
 
-    public Budget createBudget(Long clientId, Long carId, Budget budget) {
+    public Budget createBudget(Long clientId, Long carId) {
         Client client = clientService.findClientById(clientId);
         Car car = carService.findCarById(carId);
+        Budget budget = new Budget();
 
         budget.setClient(client);
         budget.setCar(car);
         budget.setCreationDate(LocalDateTime.now());
+        budget.setIsApproved(false);
 
         return repository.save(budget);
     }

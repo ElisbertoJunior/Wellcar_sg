@@ -20,8 +20,8 @@ public class BudgetController {
     private BudgetService service;
 
     @PostMapping("/{clientId}/{carId}")
-    public ResponseEntity<Budget> create(@PathVariable Long clientId, @PathVariable Long carId, @RequestBody Budget budget) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createBudget(clientId, carId, budget));
+    public ResponseEntity<Budget> create(@PathVariable Long clientId, @PathVariable Long carId) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createBudget(clientId, carId));
     }
 
     @GetMapping("/all-budgets")

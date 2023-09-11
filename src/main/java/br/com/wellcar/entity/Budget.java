@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,6 +42,8 @@ public class Budget {
             inverseJoinColumns = {@JoinColumn(name = "id_labor", referencedColumnName = "id")}
     )
     private List<Labor> labors;
+
+    private Boolean isApproved;
 
     private Double totalValue;
 

@@ -30,7 +30,6 @@ public class CalculateBudgetService {
 
         return bill;
 
-
     }
 
 
