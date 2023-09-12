@@ -3,7 +3,6 @@ package br.com.wellcar.service;
 import br.com.wellcar.entity.*;
 import br.com.wellcar.exception.BudgetNullException;
 import br.com.wellcar.repository.BudgetRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
