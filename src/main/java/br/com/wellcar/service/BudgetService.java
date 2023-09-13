@@ -50,7 +50,7 @@ public class BudgetService {
     public Budget updateBudget(Long id, Budget updateBudget) {
         Budget currentBudget = findBudgetById(id);
 
-        currentBudget.setTotalValue(CalculateBudgetService.getBill(currentBudget));
+        currentBudget.setTotalValue(CalculateService.getBill(currentBudget));
         return repository.save(currentBudget);
     }
 
@@ -67,7 +67,7 @@ public class BudgetService {
         products.add(product);
 
         budget.setProducts(products);
-        budget.setTotalValue(CalculateBudgetService.getBill(budget));
+        budget.setTotalValue(CalculateService.getBill(budget));
         return repository.save(budget);
     }
 
@@ -79,7 +79,7 @@ public class BudgetService {
         labors.add(labor);
 
         budget.setLabors(labors);
-        budget.setTotalValue(CalculateBudgetService.getBill(budget));
+        budget.setTotalValue(CalculateService.getBill(budget));
         return repository.save(budget);
     }
 

@@ -6,6 +6,7 @@ import br.com.wellcar.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +28,9 @@ public class ReportService {
             list.add(item);
         }
 
-        Double totalReport = 0.00;
-        for (OrderService item : list) {
-            totalReport += item.getBudget().getTotalValue();
-        }
 
         newReport.setOrders(list);
-        newReport.setTotalBilled(totalReport);
+        newReport.setTotalBilled(CalculateService.getReportBill(list));
 
         return repository.save(newReport);
     }
@@ -49,13 +46,40 @@ public class ReportService {
             }
         }
 
-        Double totalReport = 0.00;
-        for (OrderService item : ordersOpened) {
-            totalReport += item.getBudget().getTotalValue();
-        }
 
         newReport.setOrders(ordersOpened);
-        newReport.setTotalBilled(totalReport);
+        newReport.setTotalBilled(CalculateService.getReportBill(ordersOpened));
+
+        return repository.save(newReport);
+
+    }
+
+    public List<Report> findAllReports() {
+        return repository.findAll();
+    }
+
+    public Report createReportByPeriod(LocalDate initialDate, LocalDate finalDate) {
+        List<OrderService> orders = orderService.findAllOS();
+        Report newReport = new Report();
+        boolean noOrdersInPeriod = true;
+
+        List<OrderService> ordersInPeriod = new ArrayList<>();
+        for(OrderService order : orders) {
+            LocalDate orderDate = LocalDate.from(order.getFinishedAt());
+
+            if(orderDate.isAfter(initialDate) && orderDate.isBefore(finalDate)) {
+                ordersInPeriod.add(order);
+                noOrdersInPeriod = false;
+            }
+
+        }
+
+        if(noOrdersInPeriod) {
+            throw new NullPointerException("Nenhuma ordem encontrada no período especificado.");
+        }
+
+        newReport.setOrders(ordersInPeriod);
+        newReport.setTotalBilled(CalculateService.getReportBill(ordersInPeriod));
 
         return repository.save(newReport);
 
