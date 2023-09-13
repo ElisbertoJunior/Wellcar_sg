@@ -47,7 +47,7 @@ A documentação da API está disponível em /swagger-ui.html, onde você pode e
 ##Exemplos de Uso
 Aqui estão alguns exemplos de como usar a API:
 
-##Cadastro de Cliente
+## Cadastro de Cliente
 
 ```json
   POST /client/save
@@ -74,7 +74,10 @@ Aqui estão alguns exemplos de como usar a API:
   }
 
 ```
+
+
 ## Relatórios
+
 - Relatório de Clientes
 - Relatório de Serviços Executados
 
