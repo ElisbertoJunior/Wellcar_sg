@@ -41,7 +41,7 @@ mvn spring-boot:run
 
 A aplicação estará disponível em http://localhost:8080. Certifique-se de que a porta esteja livre para uso.
 
-##Documentação da API
+## Documentação da API
 A documentação da API está disponível em /swagger-ui.html, onde você pode explorar e testar os endpoints da API.
 
 ##Exemplos de Uso
@@ -60,7 +60,7 @@ Aqui estão alguns exemplos de como usar a API:
 }
 ```
 
-##Associação de Carro a Cliente
+## Associação de Carro a Cliente
 ```json
    POST /client/{id}/cars
   Content-Type: application/json
@@ -74,9 +74,9 @@ Aqui estão alguns exemplos de como usar a API:
   }
 
 ```
-##Relatórios
--Relatório de Clientes
--Relatório de Serviços Executados
+## Relatórios
+- Relatório de Clientes
+- Relatório de Serviços Executados
 
 
 
