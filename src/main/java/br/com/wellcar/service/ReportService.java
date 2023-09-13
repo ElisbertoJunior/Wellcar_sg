@@ -58,16 +58,15 @@ public class ReportService {
         return repository.findAll();
     }
 
-    public Report createReportByPeriod(LocalDate initialDate, LocalDate finalDate) {
+    public Report createReportByPeriod(Report newReport) {
         List<OrderService> orders = orderService.findAllOS();
-        Report newReport = new Report();
         boolean noOrdersInPeriod = true;
 
         List<OrderService> ordersInPeriod = new ArrayList<>();
         for(OrderService order : orders) {
             LocalDate orderDate = LocalDate.from(order.getFinishedAt());
 
-            if(orderDate.isAfter(initialDate) && orderDate.isBefore(finalDate)) {
+            if(orderDate.isAfter(newReport.getInitialDate()) && orderDate.isBefore(newReport.getFinalDate())) {
                 ordersInPeriod.add(order);
                 noOrdersInPeriod = false;
             }
@@ -82,6 +81,15 @@ public class ReportService {
         newReport.setTotalBilled(CalculateService.getReportBill(ordersInPeriod));
 
         return repository.save(newReport);
+    }
 
+    public Report findReport(Long id) {
+        return repository.findById(id).orElseThrow(
+                () -> new NullPointerException("O relatorio com o ID: " + id + " não foi encontrado.")
+        );
+    }
+
+    public void deleteReport(Long id) {
+        repository.deleteById(id);
     }
 }

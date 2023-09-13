@@ -7,8 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/report")
@@ -24,8 +25,8 @@ public class ReportController {
     }
 
     @PostMapping("/period")
-    public ResponseEntity<Report> createByPeriod(@RequestBody LocalDate initialDate, @RequestBody LocalDate finalDate) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createReportByPeriod(initialDate, finalDate));
+    public ResponseEntity<Report> createByPeriod(@RequestBody Report report) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createReportByPeriod(report));
     }
 
     @PostMapping("/is-open")
@@ -36,5 +37,18 @@ public class ReportController {
     @GetMapping("/all-reports")
     public ResponseEntity<List<Report>> findAllReports() {
         return ResponseEntity.ok().body(service.findAllReports());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteReport(@PathVariable Long id) {
+        service.deleteReport(id);
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", "Relatorio excluido com sucesso.");
+        return ResponseEntity.ok().body(body);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Report> find(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.findReport(id));
     }
 }

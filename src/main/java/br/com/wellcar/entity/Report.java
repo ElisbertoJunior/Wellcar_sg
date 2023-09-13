@@ -1,5 +1,7 @@
 package br.com.wellcar.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +28,11 @@ public class Report {
     )
     private List<OrderService> Orders;
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate initialDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate finalDate;
 
     private Double totalBilled;
