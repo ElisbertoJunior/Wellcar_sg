@@ -32,6 +32,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     @Operation(summary = "Login the user to the application")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid User user) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(user.getLogin(), user.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);
