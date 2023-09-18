@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "swagger-ui/**", "v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "swagger-ui/**", "v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "auth/register").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "report/create").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "report/period").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "report/is-open").hasRole("ADMIN")
