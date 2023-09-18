@@ -2,6 +2,8 @@ package br.com.wellcar.controller;
 
 import br.com.wellcar.entity.Product;
 import br.com.wellcar.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +16,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("/products")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@Tag(name = "Wellcar Products", description = "Endpoints to control products")
 public class ProductController {
 
     @Autowired
     private ProductService service;
 
     @PostMapping("/create")
+    @Operation(summary = "Create a new product")
     public ResponseEntity<Product> create(@RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerProduct(product));
     }
 
     @GetMapping("/all-products")
+    @Operation(summary = "Returns all products from the database")
     public ResponseEntity<List<Product>> findAll() {
         return ResponseEntity.ok().body(service.findAllProducts());
     }

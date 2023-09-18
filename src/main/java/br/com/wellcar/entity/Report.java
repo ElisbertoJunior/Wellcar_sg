@@ -26,7 +26,7 @@ public class Report {
             joinColumns = {@JoinColumn(name = "id_report", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_order", referencedColumnName = "id")}
     )
-    private List<OrderService> Orders;
+    private List<ServiceOrder> Orders;
 
 
     @JsonFormat(pattern = "yyyy-MM-dd")

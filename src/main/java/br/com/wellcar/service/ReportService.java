@@ -1,6 +1,6 @@
 package br.com.wellcar.service;
 
-import br.com.wellcar.entity.OrderService;
+import br.com.wellcar.entity.ServiceOrder;
 import br.com.wellcar.entity.Report;
 import br.com.wellcar.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,14 @@ public class ReportService {
     private ReportRepository repository;
 
     @Autowired
-    private OrderServiceService orderService;
+    private ServiceOrderService orderService;
 
     public Report createReport() {
-        List<OrderService> orders = orderService.findAllOS();
+        List<ServiceOrder> orders = orderService.findAllOS();
         Report newReport = new Report();
 
-        List<OrderService> list = new ArrayList<>();
-        for (OrderService item : orders) {
+        List<ServiceOrder> list = new ArrayList<>();
+        for (ServiceOrder item : orders) {
             list.add(item);
         }
 
@@ -36,11 +36,11 @@ public class ReportService {
     }
 
     public Report createReportOpenOrders() {
-        List<OrderService> orders = orderService.findAllOS();
+        List<ServiceOrder> orders = orderService.findAllOS();
         Report newReport = new Report();
 
-        List<OrderService> ordersOpened = new ArrayList<>();
-        for(OrderService order : orders) {
+        List<ServiceOrder> ordersOpened = new ArrayList<>();
+        for(ServiceOrder order : orders) {
             if (order.getStatus().equals("Em aberto")) {
                 ordersOpened.add(order);
             }
@@ -59,11 +59,11 @@ public class ReportService {
     }
 
     public Report createReportByPeriod(Report newReport) {
-        List<OrderService> orders = orderService.findAllOS();
+        List<ServiceOrder> orders = orderService.findAllOS();
         boolean noOrdersInPeriod = true;
 
-        List<OrderService> ordersInPeriod = new ArrayList<>();
-        for(OrderService order : orders) {
+        List<ServiceOrder> ordersInPeriod = new ArrayList<>();
+        for(ServiceOrder order : orders) {
             LocalDate orderDate = LocalDate.from(order.getFinishedAt());
 
             if(orderDate.isAfter(newReport.getInitialDate()) && orderDate.isBefore(newReport.getFinalDate())) {

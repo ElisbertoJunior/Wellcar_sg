@@ -2,7 +2,7 @@ package br.com.wellcar.service;
 
 import br.com.wellcar.entity.Budget;
 import br.com.wellcar.entity.Labor;
-import br.com.wellcar.entity.OrderService;
+import br.com.wellcar.entity.ServiceOrder;
 import br.com.wellcar.entity.Product;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class CalculateService {
         return getBill(budget.getProducts(), budget.getLabors());
     }
 
-    public static Double getReportBill(List<OrderService> orders) {
+    public static Double getReportBill(List<ServiceOrder> orders) {
         return getCalculateReportBill(orders);
     }
 
@@ -37,9 +37,9 @@ public class CalculateService {
 
     }
 
-    private static Double getCalculateReportBill(List<OrderService> orders) {
+    private static Double getCalculateReportBill(List<ServiceOrder> orders) {
         Double totalReport = 0.00;
-        for (OrderService item : orders) {
+        for (ServiceOrder item : orders) {
             totalReport += item.getBudget().getTotalValue();
         }
 

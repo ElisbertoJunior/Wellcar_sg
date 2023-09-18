@@ -1,12 +1,10 @@
 package br.com.wellcar.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Table(name = "tb_order_service")
-public class OrderService {
+public class ServiceOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
