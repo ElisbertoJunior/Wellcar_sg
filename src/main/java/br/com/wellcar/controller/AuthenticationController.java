@@ -4,6 +4,8 @@ import br.com.wellcar.DTO.LoginResponseDTO;
 import br.com.wellcar.entity.User;
 import br.com.wellcar.repository.UserRepository;
 import br.com.wellcar.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@Tag(name = "Wellcar Authentication", description = "Endpoints for application access control")
 public class AuthenticationController {
 
     @Autowired
@@ -28,6 +31,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
+    @Operation(summary = "Login the user to the application")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid User user) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(user.getLogin(), user.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -39,6 +43,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Registers a new user in the application")
     public ResponseEntity register(@RequestBody @Valid User user) {
         if(repository.findByLogin(user.getLogin()) != null) return ResponseEntity.badRequest().build();
 

@@ -35,16 +35,19 @@ public class ProductController {
     }
 
     @PostMapping("/update/{id}")
+    @Operation(summary = "Updates a product from the database")
     public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product updateProd) {
         return ResponseEntity.ok().body(service.updateProduct(id, updateProd));
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Returns a specific product from the database")
     public ResponseEntity<Product> find(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findProduct(id));
     }
 
     @DeleteMapping("delete/{id}")
+    @Operation(summary = "Delete a specific product from the database")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         service.deleteProduct(id);
         Map<String, Object> body = new HashMap<>();
